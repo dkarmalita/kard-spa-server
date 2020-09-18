@@ -41,7 +41,11 @@ console.log('[spa-server] base roure used:', route);
 
 const sendFile = (req, res) => {
 
-  const filePath = url.parse(req.originalUrl).pathname.substring(`/${route}`.length)
+  const subroute = `/${route}`;
+  let filePath = url.parse(req.originalUrl).pathname;
+  if(route && filePath.indexOf(subroute) === 0){
+    filePath = filePath.substring(subroute.length);
+  }
 
   const options = {
     root: fullBasePath,
