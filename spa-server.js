@@ -60,7 +60,7 @@ const sendFile = (req, res) => {
   const fileExists = fileExistsSync(fullPath);
 
   if(!fileExists && !fallbackExists){
-    return res.status(404).end('Fallback not found')
+    return res.status(404).send(`Fallback not found`);
   }
 
   const fileName = fileExists ? filePath : fallback;
