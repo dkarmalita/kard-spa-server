@@ -5,7 +5,6 @@ const path = require('path');
 const express = require('express');
 const proxy = require('express-http-proxy');
 const url = require('url');
-var cors = require('cors');
 
 const app = express();
 
