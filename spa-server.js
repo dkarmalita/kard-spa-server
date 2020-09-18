@@ -19,10 +19,12 @@ const cliValueToProxyConfig = val => ({
 });
 const proxyCfg = cliValueToProxyConfig(getCliValue('--proxy='));
 
+const handleProxy = proxy(proxyCfg.proxyBase, {
+  proxyReqPathResolver: req => req.originalUrl.substring('/api'.length),
+})
+
 if (proxyCfg.proxyBase) {
-  app.get(`/${proxyCfg.apiBase}/*`, proxy(proxyCfg.proxyBase, {
-    proxyReqPathResolver: req => req.originalUrl.substring('/api'.length),
-  }));
+  app.get(`/${proxyCfg.apiBase}/*`, handleProxy);
   console.log('[spa-server] api proxy used:', proxyCfg);
 }
 
@@ -63,10 +65,9 @@ const sendDefaultFile = (req, res) => {
 app.get('/:filePath', sendDefaultFile);
 
 app.get('/', sendDefaultFile);
+handleProxy
 
-app.use(function(req, res, next){
-  res.type('txt').send('Not found 404');
-});
+app.use(handleProxy);
 
 const port = getCliValue('--port=') || 3000;
 app.listen(port, () => console.log(`[spa-server] listening on port ${port}!`));
