@@ -73,8 +73,6 @@ const sendFile = (req, res) => {
   });
 }
 
-app.get('/:filePath', sendFile);
-
 app.get('/', sendFile);
 
 app.use(sendFile);
