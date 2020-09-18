@@ -1,10 +1,10 @@
 {
   "name": "@kard/spa-server",
-  "version": "0.1.0-beta.0",
+  "version": "0.1.0-beta.3",
   "description": "",
   "main": "spa-server.js",
   "bin": {
-    "spa-server": "spa-server"
+    "spa-server": "spa-server.js"
   },
   "dependencies": {
     "express": "^4.17.1",
