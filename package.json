@@ -1,0 +1,21 @@
+{
+  "name": "@kard/spa-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "spa-server.js",
+  "bin": {
+    "spa-server": "spa-server"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-http-proxy": "^1.6.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "spa-server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
