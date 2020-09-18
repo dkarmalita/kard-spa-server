@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
-// spa-server --proxy=api::http://jsonplaceholder.typicode.com --port=3000 --public=./ --fallback=index.html
-
 const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const proxy = require('express-http-proxy');
+const url = require('url');
+var cors = require('cors');
 
 const app = express();
 
@@ -19,11 +19,13 @@ const cliValueToProxyConfig = val => ({
 });
 const proxyCfg = cliValueToProxyConfig(getCliValue('--proxy='));
 
-const handleProxy = proxy(proxyCfg.proxyBase, {
-  proxyReqPathResolver: req => req.originalUrl.substring('/api'.length),
-})
+let handleProxy
 
 if (proxyCfg.proxyBase) {
+  handleProxy = proxy(proxyCfg.proxyBase, {
+    proxyReqPathResolver: req => req.originalUrl.substring(`/${proxyCfg.apiBase}`.length),
+  })
+
   app.get(`/${proxyCfg.apiBase}/*`, handleProxy);
   console.log('[spa-server] api proxy used:', proxyCfg);
 }
@@ -35,7 +37,13 @@ const fallback = getCliValue('--fallback=') || 'index.html';
 console.log('[spa-server] fallback used:', fallback);
 const fallbackExists = fileExistsSync(path.join(fullBasePath, fallback));
 
-const sendDefaultFile = (req, res) => {
+const route = getCliValue('--route=') || '';
+console.log('[spa-server] base roure used:', route);
+
+const sendFile = (req, res) => {
+
+  const filePath = url.parse(req.originalUrl).pathname.substring(`/${route}`.length)
+
   const options = {
     root: fullBasePath,
     dotfiles: 'deny',
@@ -45,29 +53,28 @@ const sendDefaultFile = (req, res) => {
     },
   };
 
-  const fullPath = path.join(options.root, req.params.filePath || '');
+  const fullPath = path.join(options.root, filePath || '');
   const fileExists = fileExistsSync(fullPath);
 
   if(!fileExists && !fallbackExists){
     return res.type('txt').send('Not found X')
   }
 
-  const fileName = fileExists ? req.params.filePath : fallback;
+  const fileName = fileExists ? filePath : fallback;
   res.sendFile(fileName , options, (err) => {
     if (err) {
       next(err);
     } else {
-      console.log('Sent:', fileName);
+      console.log('Sent:', fileName, ' as ', filePath);
     }
   });
 }
 
-app.get('/:filePath', sendDefaultFile);
+app.get('/:filePath', sendFile);
 
-app.get('/', sendDefaultFile);
-handleProxy
+app.get('/', sendFile);
 
-app.use(handleProxy);
+app.use(sendFile);
 
 const port = getCliValue('--port=') || 3000;
 app.listen(port, () => console.log(`[spa-server] listening on port ${port}!`));

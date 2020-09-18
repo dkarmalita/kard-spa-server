@@ -28,4 +28,6 @@ All of the requests sent to `/api/*` routes will be redirected to `http://jsonpl
 
 `--public` - allows to set public path (default `./`)
 
-`--fallback` -allows to set fallback file name (default is `index.html`)
+`--fallback` - allows to set fallback file name (default is `index.html`)
+
+`--route` - allows to set base route of the app (default is none)
