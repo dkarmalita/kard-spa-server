@@ -13,7 +13,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "spa-server.js",
+    "start": "node spa-server --proxy=api::http://jsonplaceholder.typicode.com --port=3030 --public=public --fallback=index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
