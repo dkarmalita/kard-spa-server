@@ -68,7 +68,7 @@ const sendFile = (req, res) => {
     if (err) {
       next(err);
     } else {
-      console.log('Sent:', fileName, ' as ', filePath);
+      console.log('[spa-server] sent:', fileName, ' as ', filePath);
     }
   });
 }
