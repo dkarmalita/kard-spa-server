@@ -1,3 +1,5 @@
 node_modules
-*.bak.*
 public
+*.sublime-project
+*.sublime-workspace
+*.bak.*
