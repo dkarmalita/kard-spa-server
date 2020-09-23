@@ -39,7 +39,7 @@ const fallbackExists = fileExistsSync(path.join(fullBasePath, fallback));
 const route = getCliValue('--route=') || '';
 console.log('[spa-server] base roure used:', route);
 
-const sendFile = (req, res) => {
+const sendFile = (req, res, next) => {
 
   const subroute = `/${route}`;
   let filePath = url.parse(req.originalUrl).pathname;
