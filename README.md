@@ -1,4 +1,4 @@
-A simple NodeJS based server allows serving SPA applications with optional API proxy support and all-routes fallback. Developed to test SPA locally, with Selenium-based frameworks like [Puppeteer](https://github.com/puppeteer/puppeteer)
+A simple NodeJS based server allows serving SPA applications with optional API proxy support and all-routes fallback. It developed to test SPA locally, with [Puppeteer](https://github.com/puppeteer/puppeteer) or Selenium-based frameworks.
 
 ## Installation
 
