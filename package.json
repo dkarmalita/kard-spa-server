@@ -1,6 +1,6 @@
 {
   "name": "@kard/spa-server",
-  "version": "0.1.0-beta.16",
+  "version": "0.1.0-beta.17",
   "description": "A simple NodeJS based server for SPA",
   "main": "spa-server.js",
   "homepage": "https://github.com/dkarmalita/kard-spa-server#readme",
@@ -8,15 +8,28 @@
     "spa-server": "spa-server.js"
   },
   "dependencies": {
+    "@kard/publish-next": "0.1.0-alpha.2",
     "express": "^4.17.1",
     "express-http-proxy": "^1.6.2"
   },
   "devDependencies": {},
   "scripts": {
     "start": "node spa-server --proxy=api::http://jsonplaceholder.typicode.com --port=3030 --public=public --fallback=index.html",
+    "publish-next": "publish-next",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "keywords": [
+    "server",
+    "spa",
+    "express"
+  ],
+  "author": "Dmitry Karmalita",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dkarmalita/kard-spa-server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dkarmalita/kard-spa-server/issues"
+  }
 }

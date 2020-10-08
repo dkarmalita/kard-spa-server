@@ -1,4 +1,4 @@
-A simple NodeJS based server allows to serve SPA applications with optional API proxy support and all-routes fallback. Developed to test SPA locally, with selenia based frameworks like [Puppeteer](https://github.com/puppeteer/puppeteer)
+A simple NodeJS based server allows serving SPA applications with optional API proxy support and all-routes fallback. Developed to test SPA locally, with Selenium-based frameworks like [Puppeteer](https://github.com/puppeteer/puppeteer)
 
 ## Installation
 
@@ -13,21 +13,20 @@ npm add -D @kard/spa-server
 spa-server --proxy=api::http://jsonplaceholder.typicode.com --port=3030 --public=public --fallback=index.html
 ```
 
-The exemple above will serve static files from `./public` relative path, on port 3030. 
+The example above : 
+* Will serve static files from `./public` relative path, on port 3030. 
+* Each file is absent will be replaced with `./public/index.html` one.
+* All of the requests sent to `/api/*` routes will be redirected to `http://jsonplaceholder.typicode.com` base.
 
-Each file is absent will be replaced with `./public/index.html` one.
 
-All of the requests sent to `/api/*` routes will be redirected to `http://jsonplaceholder.typicode.com` base.
+## Command-line keys available
 
+`--proxy` - allows setting API requests redirect (no default)
 
-## Command line keys available
+`--port` - allows setting the server port to use (default 3000)
 
-`--proxy` - allows to set api requests redirect (no default)
+`--public` - allows setting public path (default `./`)
 
-`--port` - allows to set the server port to use (default 3000)
+`--fallback` - allows setting fallback file name (default is `index.html`)
 
-`--public` - allows to set public path (default `./`)
-
-`--fallback` - allows to set fallback file name (default is `index.html`)
-
-`--route` - allows to set base route of the app (default is none)
+`--route` - allows setting base route of the app (default is none)
