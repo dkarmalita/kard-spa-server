@@ -1,6 +1,6 @@
 {
   "name": "@kard/spa-server",
-  "version": "0.1.0-beta.19",
+  "version": "0.1.0-beta.20",
   "description": "A simple NodeJS based server for SPA",
   "main": "spa-server.js",
   "homepage": "https://github.com/dkarmalita/kard-spa-server#readme",
