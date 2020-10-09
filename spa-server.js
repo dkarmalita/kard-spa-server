@@ -32,6 +32,7 @@ if (proxyCfg.proxyBase) {
 const publicPath = getCliValue('--public=') || './';
 const fullBasePath = path.join(process.cwd(), publicPath);
 console.log('[spa-server] public path:', fullBasePath);
+
 const fallback = getCliValue('--fallback=') || 'index.html';
 console.log('[spa-server] fallback used:', fallback);
 const fallbackExists = fileExistsSync(path.join(fullBasePath, fallback));
